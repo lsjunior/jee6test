@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formEdit" prependId="false">
+		<div>
+			<p:panel header="#{messages['label.certificate']}" style="width: 400px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.user']}" />  : </td>
+						<td style="width: 75%;">
+							<h:outputText value="#{certificateBean.user.name}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.serialNumber']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.serialNumber}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.alias']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.alias}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.subject']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.subject}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.issuer']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.issuer}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.hash']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.hash}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.notAfter']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.notAfter}">
+								<f:convertDateTime pattern="hh:mm:ss" />
+							</h:outputText>
+							<h:outputText value="#{certificateBean.certificate.notAfter}">
+								<f:convertDateTime pattern="#{messages['format.date']}" />
+							</h:outputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.algorithm']}" />  : </td>
+						<td>
+							<h:outputText value="#{certificateBean.certificate.algorithm}" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.download']} PKCS12" action="#{certificateBean.downloadPKCS12}" rendered="#{certificateBean.pkcs12 != null}" ajax="false" />
+							<p:commandButton value="#{messages['label.download']} CRT" action="#{certificateBean.downloadCert}" ajax="false" />
+							<p:commandButton value="#{messages['label.back']}" action="#{certificateBean.back}" ajax="false" />			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+		</div>
+	</h:form>
+</html>

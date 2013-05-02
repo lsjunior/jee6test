@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formList" prependId="false">
+		<div>
+			<p:panel header="#{messages['label.user']}" style="width: 400px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.filter']}" /> : </td>
+						<td style="width: 75%;">
+							<p:inputText value="#{userBean.filter}" size="30" maxlength="100" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.search']}" action="#{userBean.list}" ajax="false" />
+							<p:commandButton value="#{messages['label.new']}" action="#{userBean.newUser}" ajax="false" />
+							<p:commandButton value="#{messages['label.cancel']}" action="#{userBean.end}" ajax="false" />			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+			<br />
+			<p:dataTable value="#{userBean.users}" var="user" rendered="#{userBean.users != null}" style="width: 500px; margin: auto;" noDataLabel="#{messages['msg.info.noData']}" rows="5" lazy="true" first="#{userBean.pageNumber}" paginator="true" paginatorPosition="bottom">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.login']}" />
+					</f:facet>
+					<h:outputText value="#{user.login}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.name']}" />
+					</f:facet>
+					<h:outputText value="#{user.name}" />						
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.email']}" />
+					</f:facet>						
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.action']}" />
+					</f:facet>
+					<p:commandButton alt="#{messages['label.edit']}" title="#{messages['label.edit']}" action="#{userBean.edit}" ajax="false" icon="ui-icon-pencil">
+						<f:setPropertyActionListener target="#{userBean.id}" value="#{user.id}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</div>
+	</h:form>
+</html>

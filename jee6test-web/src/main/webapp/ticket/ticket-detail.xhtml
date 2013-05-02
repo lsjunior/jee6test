@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formEdit" prependId="false">
+		<div>
+			<p:panel header="#{messages['label.ticket']}" style="width: 400px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.from']}" />  : </td>
+						<td style="width: 75%;">
+							<h:outputText value="#{ticketBean.ticket.session.certificate.application.alias}"/>
+							-
+							<h:outputText value="#{ticketBean.ticket.session.certificate.application.name}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.to']}" />  : </td>
+						<td>
+							<h:outputText value="#{ticketBean.ticket.application.alias}"/>
+							-
+							<h:outputText value="#{ticketBean.ticket.application.name}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.creation']}" />  : </td>
+						<td>
+							<h:outputText value="#{ticketBean.ticket.creation}">
+								<f:convertDateTime pattern="#{messages['format.time']}" />
+							</h:outputText>
+							<h:outputText value="#{ticketBean.ticket.creation}">
+								<f:convertDateTime pattern="#{messages['format.date']}" />
+							</h:outputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.expires']}" />  : </td>
+						<td>
+							<h:outputText value="#{ticketBean.ticket.expires}">
+								<f:convertDateTime pattern="#{messages['format.time']}" />
+							</h:outputText>
+							<h:outputText value="#{ticketBean.ticket.expires}">
+								<f:convertDateTime pattern="#{messages['format.date']}" />
+							</h:outputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.status']}" />  : </td>
+						<td>
+							<h:outputText value="#{ticketBean.ticket.status}" />
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.data']}" />  : </td>
+						<td>
+							<h:outputText value="#{ticketBean.ticketData}" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.back']}" action="#{ticketBean.back}" ajax="false" />			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+		</div>
+	</h:form>
+</html>

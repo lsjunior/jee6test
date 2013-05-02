@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formEdit" prependId="false" enctype="multipart/form-data">
+		<div>
+			<p:panel header="#{messages['label.certificate']}" style="width: 550px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.user']}" /> : </td>
+						<td style="width: 75%;">
+							<h:outputText value="#{certificateBean.user.name}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.alias']}" /> : </td>
+						<td>
+							<p:inputText id="alias" value="#{certificateBean.alias}" size="15" maxlength="45">
+								<f:validateLength minimum="3" maximum="45" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align: top;"><h:outputText value="#{messages['label.file']}" /> : </td>
+						<td>
+							<p:fileUpload fileUploadListener="#{certificateBean.uploadListener}" mode="advanced" auto="true" multiple="false" update="btnSave uploadedFileName" allowTypes="/(\.|\/)(cer|crt|der|pem|txt)$/" />
+							<br />
+							<h:outputText id="uploadedFileName" value="#{certificateBean.uploadedFileName}" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton id="btnSave" value="#{messages['label.save']}" action="#{certificateBean.upload}" disabled="#{certificateBean.uploadedFile == null}" ajax="false" />
+							<p:commandButton value="#{messages['label.cancel']}" action="#{certificateBean.cancel}" immediate="true" ajax="false"/>			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+		</div>
+	</h:form>
+</html>

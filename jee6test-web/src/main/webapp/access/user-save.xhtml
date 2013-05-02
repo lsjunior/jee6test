@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formEdit" prependId="false">
+		<div>
+			<p:panel header="#{messages['label.user']}" style="width: 400px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.login']}" /> : </td>
+						<td style="width: 75%;">
+							<h:inputHidden value="#{userBean.id}" />
+							<p:inputText id="login" value="#{userBean.login}" size="15" maxlength="45">
+								<f:validateLength minimum="3" maximum="45" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.name']}" /> : </td>
+						<td>
+							<p:inputText id="name" value="#{userBean.name}" size="30" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.email']}" /> : </td>
+						<td>
+							<p:inputText id="email" value="#{userBean.email}" size="30" maxlength="100">
+								<f:validateLength minimum="5" maximum="100" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.password']}" /> : </td>
+						<td>
+							<p:password id="password" value="#{userBean.password}" size="15" maxlength="20" required="#{userBean.id == null}">
+								<f:validateLength minimum="3" maximum="20" disabled="#{userBean.id == null}" />
+							</p:password>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.type']}" /> : </td>
+						<td>
+							<p:selectOneMenu id="type" value="#{userBean.type}">
+								<f:selectItem itemLabel="#{messages['label.administrator']}" itemValue="ADMINISTRATOR" />
+								<f:selectItem itemLabel="#{messages['label.user']}" itemValue="USER" />
+							</p:selectOneMenu>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.save']}" action="#{userBean.save}" ajax="false" />
+							<p:commandButton value="#{messages['label.cancel']}" action="#{userBean.cancel}" immediate="true" ajax="false"/>			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+		</div>
+	</h:form>
+</html>

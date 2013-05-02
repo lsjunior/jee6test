@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formList">
+		<div>
+			<p:panel header="#{messages['label.certificate']}" style="width: 400px; margin: auto;" rendered="#{certificateBean.user == null}">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.user']}" /> : </td>
+						<td style="width: 75%;">
+							<p:autoComplete value="#{certificateBean.user}" completeMethod="#{certificateBean.completeUser}" var="u" itemLabel="#{u.name}" itemValue="#{u}" converter="#{userConverter}" forceSelection="true" size="40">
+								<p:ajax event="itemSelect" listener="#{certificateBean.handleSelectUser}" update="@form" />
+							</p:autoComplete>
+						</td>
+					</tr>
+				</table>				
+			</p:panel>
+			<p:panel header="Certificate" style="width: 400px; margin: auto;" rendered="#{certificateBean.user != null}">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;"><h:outputText value="#{messages['label.user']}" /> : </td>
+						<td style="width: 75%;">
+							<h:outputText value="#{certificateBean.user.name}"/>
+							(
+							<h:outputText value="#{certificateBean.user.login}"/>
+							)
+						</td>
+					</tr>
+					<tr>
+						<td>Certificate : </td>
+						<td class="#{certificateBean.user.certificate == null or certificateBean.user.certificate.active ? '' : 'msg'}">
+							<h:panelGroup rendered="#{certificateBean.user.certificate != null}">
+								<h:outputText value="#{certificateBean.user.certificate.alias}" />
+								<br />
+								<h:outputText value="#{certificateBean.user.certificate.subject}" />
+								<br />
+								<h:outputText value="#{certificateBean.user.certificate.issuer}" />
+								<br />
+							</h:panelGroup>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.new']}" action="#{certificateBean.newCertificate}" ajax="false" />
+							<p:commandButton value="#{messages['label.upload']}" action="#{certificateBean.uploadCertificate}" ajax="false"/>
+							<p:commandButton value="#{messages['label.view']}" action="#{certificateBean.show}" ajax="false"/>
+							<p:commandButton value="#{messages['label.cancel']}" action="#{certificateBean.cancel}" ajax="false"/>
+						</td>
+					</tr>
+				</table>
+			</p:panel>
+		</div>
+	</h:form>
+</html>

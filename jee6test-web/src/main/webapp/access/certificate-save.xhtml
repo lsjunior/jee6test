@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formEdit" prependId="false">
+		<div>
+			<p:panel header="#{messages['label.certificate']}" style="width: 400px; margin: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 35%;"><h:outputText value="#{messages['label.user']}" /> : </td>
+						<td style="width: 65%;">
+							<h:outputText value="#{certificateBean.user.name}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.alias']}" /> : </td>
+						<td>
+							<p:inputText id="alias" value="#{certificateBean.alias}" size="15" maxlength="45">
+								<f:validateLength minimum="3" maximum="45" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.subject']}" /> : </td>
+						<td>
+							<p:inputText id="subject" value="#{certificateBean.subject}" size="30" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.issuer']}" /> : </td>
+						<td>
+							<p:inputText id="issuer" value="#{certificateBean.issuer}" size="30" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.storePassword']}" /> : </td>
+						<td>
+							<p:inputText id="storePassword" value="#{certificateBean.storePassword}" size="15" maxlength="20" autocomplete="false">
+								<f:validateLength minimum="3" maximum="20" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{messages['label.keyPassword']}" /> : </td>
+						<td>
+							<p:inputText id="keyPassword" value="#{certificateBean.keyPassword}" size="15" maxlength="20" autocomplete="false">
+								<f:validateLength minimum="3" maximum="20" />
+							</p:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<p:commandButton value="#{messages['label.save']}" action="#{certificateBean.create}" ajax="false" />
+							<p:commandButton value="#{messages['label.cancel']}" action="#{certificateBean.cancel}" immediate="true" ajax="false"/>			
+						</td>
+					</tr>
+				</table>					
+			</p:panel>
+		</div>
+	</h:form>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="defaultPU" transaction-type="JTA">
+		<jta-data-source>java:/jdbc/tickettoride-mysql</jta-data-source>
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+		<!-- Model -->
+		<mapping-file>orm.xml</mapping-file>
+		<class>br.net.woodstock.tickettoride.orm.Certificate</class>
+		<class>br.net.woodstock.tickettoride.orm.Contact</class>
+		<class>br.net.woodstock.tickettoride.orm.Ticket</class>
+		<class>br.net.woodstock.tickettoride.orm.TicketDestination</class>
+		<class>br.net.woodstock.tickettoride.orm.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>		
+		<!-- Cache -->
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		<!-- Validation -->
+		<!-- <validation-mode>CALLBACK</validation-mode> -->
+		<properties>
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />-->
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.listeners.envers.autoRegister" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>		
+	</persistence-unit>
+</persistence>

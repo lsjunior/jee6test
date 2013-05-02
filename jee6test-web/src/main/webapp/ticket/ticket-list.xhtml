@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<h:form id="formList">
+		<div>
+			<p:dataTable value="#{ticketBean.tickets}" var="ticket" style="width: 500px; margin: auto;" noDataLabel="#{messages['msg.info.noData']}" rows="5" lazy="true" paginator="true" paginatorPosition="bottom">
+				<f:facet name="header">
+					<h:outputText value="#{messages['label.outbox']}" />
+				</f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.date']}" />
+					</f:facet>
+					<h:outputText value="#{ticket.creation}">
+						<f:convertDateTime pattern="#{messages['format.time']}" />
+					</h:outputText>
+					<h:outputText value="#{ticket.creation}">
+						<f:convertDateTime pattern="#{messages['format.date']}" />
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.to']}" />
+					</f:facet>
+					<ui:repeat var="dest" value="#{ticket.destinations.toArray()}">
+						<h:outputText value="#{dest.user.name}" /><br />
+					</ui:repeat>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.action']}" />
+					</f:facet>
+					<p:commandButton alt="#{messages['label.view']}" title="#{messages['label.view']}" action="#{ticketBean.showTicket}" ajax="false" icon="ui-icon-search">
+						<f:setPropertyActionListener target="#{ticketBean.id}" value="#{ticket.id}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<br />
+			<p:dataTable value="#{ticketBean.ticketDestinations}" var="ticketDestination" style="width: 500px; margin: auto;" noDataLabel="#{messages['msg.info.noData']}" rows="5" lazy="true" paginator="true" paginatorPosition="bottom">
+				<f:facet name="header">
+					<h:outputText value="#{messages['label.inbox']}" />
+				</f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.from']}" />
+					</f:facet>
+					<h:outputText value="#{ticketDestination.ticket.user.name}" /><br />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.date']}" />
+					</f:facet>
+					<h:outputText value="#{ticketDestination.ticket.creation}">
+						<f:convertDateTime pattern="#{messages['format.time']}" />
+					</h:outputText>
+					<h:outputText value="#{ticketDestination.ticket.creation}">
+						<f:convertDateTime pattern="#{messages['format.date']}" />
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.status']}" />
+					</f:facet>
+					<h:outputText value="#{ticketDestination.active}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['label.action']}" />
+					</f:facet>
+					<p:commandButton alt="#{messages['label.view']}" title="#{messages['label.view']}" action="#{ticketBean.showTicketDestination}" ajax="false" icon="ui-icon-search">
+						<f:setPropertyActionListener target="#{ticketBean.id}" value="#{ticketDestination.id}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</div>
+	</h:form>
+</html>
